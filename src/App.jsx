@@ -38,6 +38,8 @@ const App = () => {
     setPoints({ ...points, [selected]: updatePoint });
   };
 
+  const largestPointKey = largestKey(points);
+
   return (
     <div>
       <h2>Anecdote of the Day</h2>
@@ -53,7 +55,8 @@ const App = () => {
       </button>
       <br />
       <h2>Top Anecdote</h2>
-      <p>{anecdotes[largestKey(points)]}</p>
+      <p>{anecdotes[largestPointKey]}</p>
+      <p>has {points[largestPointKey]} votes</p>
     </div>
   );
 };
