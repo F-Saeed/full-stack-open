@@ -32,18 +32,15 @@ const App = () => {
   const largestKey = (obj) =>
     Object.keys(obj).reduce((a, b) => (obj[a] > obj[b] ? a : b));
 
-  console.log(points);
-  console.log(largestKey(points));
-
   const handleVote = () => {
-    const updatePoint = selected + 1;
+    const updatePoint = points[selected] + 1;
 
-    setPoints({ ...points, updatePoint });
-    console.log(points);
+    setPoints({ ...points, [selected]: updatePoint });
   };
 
   return (
     <div>
+      <h2>Anecdote of the Day</h2>
       {anecdotes[selected]}
       <br />
       has {points[selected]} votes
@@ -54,6 +51,9 @@ const App = () => {
       <button type='button' onClick={() => randomAnecdote(anecdotes)}>
         Next Anecdote
       </button>
+      <br />
+      <h2>Top Anecdote</h2>
+      <p>{anecdotes[largestKey(points)]}</p>
     </div>
   );
 };
