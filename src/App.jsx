@@ -12,13 +12,6 @@ const App = () => {
   ];
 
   const [selected, setSelected] = useState(0);
-
-  const randomAnecdote = (arr) => {
-    const random = () => Math.floor(Math.random() * arr.length);
-
-    setSelected(random());
-  };
-
   const [points, setPoints] = useState({
     0: 0,
     1: 0,
@@ -29,6 +22,12 @@ const App = () => {
     6: 0,
   });
 
+  const randomAnecdote = (arr) => {
+    const random = () => Math.floor(Math.random() * arr.length);
+
+    setSelected(random());
+  };
+
   const largestKey = (obj) =>
     Object.keys(obj).reduce((a, b) => (obj[a] > obj[b] ? a : b));
 
@@ -38,7 +37,7 @@ const App = () => {
     setPoints({ ...points, [selected]: updatePoint });
   };
 
-  const largestPointKey = largestKey(points);
+  const largestVoteKey = largestKey(points);
 
   return (
     <div>
@@ -55,8 +54,8 @@ const App = () => {
       </button>
       <br />
       <h2>Top Anecdote</h2>
-      <p>{anecdotes[largestPointKey]}</p>
-      <p>has {points[largestPointKey]} votes</p>
+      <p>{anecdotes[largestVoteKey]}</p>
+      <p>has {points[largestVoteKey]} votes</p>
     </div>
   );
 };
