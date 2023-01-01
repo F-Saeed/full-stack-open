@@ -6,9 +6,17 @@ const App = () => {
 
   const addName = (event) => {
     event.preventDefault();
-    setPersons(
-      persons.concat({ name: event.target.firstChild.lastChild.value })
-    );
+
+    const name = event.target.firstChild.lastChild.value;
+
+    for (let index = 0; index < persons.length; index++) {
+      if (persons[index].name === name) {
+        alert(`${name} already is already in the Phonebook`);
+        return;
+      }
+    }
+
+    setPersons(persons.concat({ name }));
     setNewName('');
   };
 
