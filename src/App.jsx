@@ -1,5 +1,6 @@
 // React
 import { useState } from 'react';
+import Filtered from './components/Filtered';
 import Form from './components/Form';
 
 // Components
@@ -26,17 +27,7 @@ const App = () => {
         setFiltered={setFiltered}
       />
       <h2>Numbers</h2>
-      {filtered
-        ? filtered.map((item) => (
-            <p key={item.id}>
-              {item.name} <span>{item.number}</span>
-            </p>
-          ))
-        : persons.map((item) => (
-            <p key={item.id}>
-              {item.name} <span>{item.number}</span>
-            </p>
-          ))}
+      <Filtered filtered={filtered} persons={persons} />
     </div>
   );
 };

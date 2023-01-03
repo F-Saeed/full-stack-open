@@ -21,6 +21,7 @@ const Search = ({ persons, setFiltered }) => {
       <form onSubmit={searchName}>
         <input
           type='text'
+          minLength='1'
           value={search}
           onChange={(event) => setSearch(event.target.value)}
         />
