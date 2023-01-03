@@ -25,20 +25,16 @@ const App = () => {
     }
 
     const number = event.target.children[1].lastChild.value;
-    setPersons(persons.concat({ name, number }));
+    const numberWithDashes = number.replace(
+      /^(\d{4})(\d{3})(\d{4})/,
+      '$1-$2-$3'
+    );
+
+    console.log(numberWithDashes);
+
+    setPersons(persons.concat({ name, number: numberWithDashes }));
     setNewName('');
     setNewNumber('');
-  };
-
-  const numberChange = (event) => {
-    if (
-      event.key != 'Backspace' &&
-      (event.target.value.length === 3 || event.target.value.length === 7)
-    ) {
-      event.target.value += '-';
-    }
-
-    setNewNumber(event.target.value);
   };
 
   const searchName = (event) => {
@@ -89,11 +85,11 @@ const App = () => {
           <input
             name='Telephone Number'
             type='tel'
-            placeholder='123-456-7890'
-            maxLength='17'
+            placeholder='+923411111095(0)'
+            maxLength='14'
             required
             value={newNumber}
-            onChange={numberChange}
+            onChange={(event) => setNewNumber(event.target.value)}
           />
         </div>
         <div>
