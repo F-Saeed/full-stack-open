@@ -2,10 +2,16 @@ import { useState } from 'react';
 
 const App = () => {
   const [persons, setPersons] = useState([
-    { name: 'Arto Hellas', number: '123-456-7890' },
+    { name: 'Arto Hellas', number: '040-123456', id: 1 },
+    { name: 'Ada Lovelace', number: '39-44-5323523', id: 2 },
+    { name: 'Dan Abramov', number: '12-43-234345', id: 3 },
+    { name: 'Mary Poppendieck', number: '39-23-6423122', id: 4 },
   ]);
+  const [filtered, setFiltered] = useState('');
+
   const [newName, setNewName] = useState('');
   const [newNumber, setNewNumber] = useState('');
+  const [search, setSearch] = useState('');
 
   const addName = (event) => {
     event.preventDefault();
@@ -19,7 +25,6 @@ const App = () => {
     }
 
     const number = event.target.children[1].lastChild.value;
-    console.log(number);
     setPersons(persons.concat({ name, number }));
     setNewName('');
     setNewNumber('');
@@ -36,9 +41,37 @@ const App = () => {
     setNewNumber(event.target.value);
   };
 
+  const searchName = (event) => {
+    event.preventDefault();
+
+    const searchItem = event.target.children[0].value.toLowerCase();
+    const filteredNames = persons.filter(
+      (item) => item.name.toLowerCase() === searchItem
+    );
+
+    setFiltered(filteredNames);
+    setSearch('');
+  };
+
   return (
     <div>
       <h2>Phonebook</h2>
+      <div>
+        filter shown with:
+        <form onSubmit={searchName}>
+          <input
+            type='text'
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
+          />
+          <button type='submit'>Search Name</button>
+        </form>
+        <button type='button' onClick={() => setFiltered('')}>
+          Reset
+        </button>
+      </div>
+      <br />
+      <h3>Add New</h3>
       <form onSubmit={addName}>
         <div>
           Name:{' '}
@@ -56,9 +89,8 @@ const App = () => {
           <input
             name='Telephone Number'
             type='tel'
-            pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}'
             placeholder='123-456-7890'
-            maxLength='12'
+            maxLength='17'
             required
             value={newNumber}
             onChange={numberChange}
@@ -69,11 +101,17 @@ const App = () => {
         </div>
       </form>
       <h2>Numbers</h2>
-      {persons.map((item) => (
-        <p key={item.name}>
-          {item.name} <span>{item.number}</span>
-        </p>
-      ))}
+      {filtered
+        ? filtered.map((item) => (
+            <p key={item.id}>
+              {item.name} <span>{item.number}</span>
+            </p>
+          ))
+        : persons.map((item) => (
+            <p key={item.id}>
+              {item.name} <span>{item.number}</span>
+            </p>
+          ))}
     </div>
   );
 };
