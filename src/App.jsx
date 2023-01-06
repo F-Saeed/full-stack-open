@@ -1,17 +1,21 @@
 // React
 import axios from 'axios';
 import { useState, useEffect, Fragment } from 'react';
+
+// Components
+import Country from './components/Country';
+import CountryInformation from './components/CountryInformation';
 import Search from './components/Search';
 
 const App = () => {
-  const [countries, setCountries] = useState([]);
+  const [countriesData, setCountriesData] = useState([]);
   const [search, setSearch] = useState('');
 
   useEffect(() => {
     if (search) {
       axios
         .get(`https://restcountries.com/v3.1/name/${search}`)
-        .then((resp) => setCountries(resp.data));
+        .then((resp) => setCountriesData(resp.data));
     }
   }, [search]);
 
@@ -21,27 +25,16 @@ const App = () => {
       <p>
         Find Country <Search search={search} setSearch={setSearch} />
       </p>
-      {countries.length > 10 ? (
+      {countriesData.length > 10 ? (
         'Too Many Countries'
-      ) : countries.length === 1 ? (
-        countries.map((item) => (
-          <Fragment key={item.cca2}>
-            <h2>{item.name.common}</h2>
-            <p>capital {item.capital[0]}</p>
-            <p>area {item.area}</p>
-            <h4>Languages</h4>
-            <ul>
-              {Object.values(item.languages).map((lang) => (
-                <li key={lang}>{lang}</li>
-              ))}
-            </ul>
-            <img src={item.flags.png} alt='Country Flag' />
-          </Fragment>
+      ) : countriesData.length === 1 ? (
+        countriesData.map((item) => (
+          <CountryInformation key={item.cca2} item={item} />
         ))
       ) : (
         <ul>
-          {countries.map((item) => (
-            <li key={item.cca2}>{item.name.common}</li>
+          {countriesData.map((item) => (
+            <Country key={item.cca2} item={item} />
           ))}
         </ul>
       )}
