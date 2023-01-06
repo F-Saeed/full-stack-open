@@ -1,4 +1,7 @@
+// React
 import { useState } from 'react';
+
+// Components
 import CountryInformation from './CountryInformation';
 
 const Country = ({ item }) => {

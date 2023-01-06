@@ -1,6 +1,8 @@
 // React
-import axios from 'axios';
 import { useState, useEffect, Fragment } from 'react';
+
+// External Libraries
+import axios from 'axios';
 
 // Components
 import Country from './components/Country';

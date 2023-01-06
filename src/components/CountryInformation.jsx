@@ -1,4 +1,8 @@
+// React
 import { Fragment } from 'react';
+
+// Components
+import Weather from './Weather';
 
 const CountryInformation = ({ item }) => {
   return (
@@ -13,6 +17,7 @@ const CountryInformation = ({ item }) => {
         ))}
       </ul>
       <img src={item.flags.png} alt='Country Flag' />
+      <Weather city={item.capital[0]} />
     </Fragment>
   );
 };
