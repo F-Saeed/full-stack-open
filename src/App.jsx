@@ -1,5 +1,4 @@
 // React
-import axios from 'axios';
 import { useState, useEffect } from 'react';
 import Filtered from './components/Filtered';
 import Form from './components/Form';
@@ -7,14 +6,15 @@ import Form from './components/Form';
 // Components
 import Search from './components/Search';
 
+// Utility Functions
+import services from './Functions/services';
+
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [filtered, setFiltered] = useState('');
 
   useEffect(() => {
-    axios
-      .get('http://localhost:3000/persons')
-      .then((resp) => setPersons(resp.data));
+    services.getAll().then((resp) => setPersons(resp));
   }, []);
 
   return (

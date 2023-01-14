@@ -1,5 +1,6 @@
 // React
 import { useState } from 'react';
+import services from '../Functions/services';
 
 // Components
 import Name from './Name';
@@ -30,9 +31,11 @@ const Form = ({ persons, setPersons, setFiltered }) => {
       persons.concat({
         name,
         number: numberWithDashes,
-        id: new Date().getTime(),
       })
     );
+
+    services.create({ name, number });
+
     setNewName('');
     setNewNumber('');
     setFiltered('');
