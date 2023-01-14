@@ -7,6 +7,7 @@ import axios from 'axios';
 // Components
 import Country from './components/Country';
 import CountryInformation from './components/CountryInformation';
+git;
 import Search from './components/Search';
 
 const App = () => {
