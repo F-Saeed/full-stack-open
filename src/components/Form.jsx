@@ -1,10 +1,12 @@
 // React
 import { useState } from 'react';
-import services from '../Functions/services';
 
 // Components
 import Name from './Name';
 import Number from './Number';
+
+// Utility Functions
+import services from '../Functions/services';
 
 const Form = ({ persons, setPersons, setFiltered }) => {
   const [newName, setNewName] = useState('');
@@ -27,14 +29,15 @@ const Form = ({ persons, setPersons, setFiltered }) => {
       '$1-$2-$3'
     );
 
+    services.createItem({ name, number, id: new Date().getTime() });
+
     setPersons(
       persons.concat({
         name,
         number: numberWithDashes,
+        id: new Date().getTime(),
       })
     );
-
-    services.create({ name, number });
 
     setNewName('');
     setNewNumber('');

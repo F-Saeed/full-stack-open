@@ -1,4 +1,7 @@
-const Filtered = ({ filtered, persons }) => {
+// Components
+import Delete from './Delete';
+
+const Filtered = ({ filtered, persons, setPersons }) => {
   return (
     <>
       {Array.isArray(filtered) && filtered.length === 0 ? (
@@ -12,7 +15,8 @@ const Filtered = ({ filtered, persons }) => {
       ) : (
         persons.map((item) => (
           <p key={item.id}>
-            {item.name} <span>{item.number}</span>
+            {item.name} <span>{item.number}</span>{' '}
+            <Delete id={item.id} persons={persons} setPersons={setPersons} />
           </p>
         ))
       )}

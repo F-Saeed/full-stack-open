@@ -14,7 +14,7 @@ const App = () => {
   const [filtered, setFiltered] = useState('');
 
   useEffect(() => {
-    services.getAll().then((resp) => setPersons(resp));
+    services.getAllItems().then((resp) => setPersons(resp));
   }, []);
 
   return (
@@ -28,7 +28,7 @@ const App = () => {
         setFiltered={setFiltered}
       />
       <h2>Numbers</h2>
-      <Filtered filtered={filtered} persons={persons} />
+      <Filtered filtered={filtered} persons={persons} setPersons={setPersons} />
     </div>
   );
 };
