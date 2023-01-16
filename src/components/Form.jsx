@@ -29,8 +29,6 @@ const Form = ({ persons, setPersons, setFiltered }) => {
       '$1-$2-$3'
     );
 
-    services.createItem({ name, number, id: new Date().getTime() });
-
     setPersons(
       persons.concat({
         name,
@@ -38,6 +36,8 @@ const Form = ({ persons, setPersons, setFiltered }) => {
         id: new Date().getTime(),
       })
     );
+
+    services.createItem({ name, number, id: new Date().getTime() });
 
     setNewName('');
     setNewNumber('');

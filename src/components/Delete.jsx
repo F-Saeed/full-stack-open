@@ -6,8 +6,10 @@ import services from '../Functions/services';
 
 const Delete = ({ id, persons, setPersons }) => {
   const handleClick = () => {
-    setPersons(persons.filter((item) => item.id !== id));
-    services.deleteItem(id);
+    if (window.confirm('Are you sure you want to delete this item?')) {
+      setPersons(persons.filter((item) => item.id !== id));
+      services.deleteItem(id);
+    }
   };
 
   return (

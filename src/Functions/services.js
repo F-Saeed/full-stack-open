@@ -9,7 +9,7 @@ const getAllItems = async () => {
 
 const createItem = async (newObject) => {
   const request = axios.post(baseURL, newObject);
-  return await request.then((resp) => console.log('create', resp.data));
+  return await request.then((resp) => resp.data);
 };
 
 const updateItem = async (id, newObject) => {
