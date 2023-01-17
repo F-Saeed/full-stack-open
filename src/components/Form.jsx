@@ -8,7 +8,7 @@ import Number from './Number';
 // Utility Functions
 import services from '../Functions/services';
 
-const Form = ({ persons, setPersons, setFiltered }) => {
+const Form = ({ persons, setPersons, setFiltered, setMessage }) => {
   const [newName, setNewName] = useState('');
   const [newNumber, setNewNumber] = useState('');
 
@@ -34,6 +34,7 @@ const Form = ({ persons, setPersons, setFiltered }) => {
       );
 
       services.createItem({ name, number, id: new Date().getTime() });
+      setMessage(`${name} was added to the Phonebook`);
     } else if (
       window.confirm(
         `${name} is already in the Phonebook, Are you sure you want to replace it?`
@@ -57,6 +58,7 @@ const Form = ({ persons, setPersons, setFiltered }) => {
       };
 
       setPersons(altPersons);
+      setMessage(`${name} was edited in the Phonebook`);
     }
 
     setNewName('');

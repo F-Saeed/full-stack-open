@@ -6,6 +6,7 @@ import Form from './components/Form';
 
 // Components
 import Search from './components/Search';
+import Message from './components/Message/Message';
 
 // Utility Functions
 import services from './Functions/services';
@@ -13,6 +14,7 @@ import services from './Functions/services';
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [filtered, setFiltered] = useState('');
+  const [message, setMessage] = useState(null);
 
   useDeepCompareEffect(() => {
     services.getAllItems().then((resp) => setPersons(resp));
@@ -22,12 +24,14 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Message message={message} />
       <Search persons={persons} setFiltered={setFiltered} />
       <br />
       <Form
         persons={persons}
         setPersons={setPersons}
         setFiltered={setFiltered}
+        setMessage={setMessage}
       />
       <h2>Numbers</h2>
       <Filtered filtered={filtered} persons={persons} setPersons={setPersons} />
