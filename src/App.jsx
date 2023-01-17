@@ -1,5 +1,6 @@
 // React
 import { useState, useEffect } from 'react';
+import useDeepCompareEffect from 'use-deep-compare-effect';
 import Filtered from './components/Filtered';
 import Form from './components/Form';
 
@@ -13,9 +14,10 @@ const App = () => {
   const [persons, setPersons] = useState([]);
   const [filtered, setFiltered] = useState('');
 
-  useEffect(() => {
+  useDeepCompareEffect(() => {
     services.getAllItems().then((resp) => setPersons(resp));
-  }, [persons.length]);
+    // console.log(persons)
+  }, [, persons]);
 
   return (
     <div>

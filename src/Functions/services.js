@@ -2,24 +2,24 @@ import axios from 'axios';
 
 const baseURL = 'http://localhost:3000/persons';
 
-const getAllItems = async () => {
+const getAllItems = () => {
   const request = axios.get(baseURL);
-  return await request.then((resp) => resp.data);
+  return request.then((resp) => resp.data);
 };
 
-const createItem = async (newObject) => {
+const createItem = (newObject) => {
   const request = axios.post(baseURL, newObject);
-  return await request.then((resp) => resp.data);
+  return request.then((resp) => resp.data);
 };
 
-const updateItem = async (id, newObject) => {
+const updateItem = (id, newObject) => {
   const request = axios.put(`${baseURL}/${id}`, newObject);
-  return await request.then((resp) => resp.data);
+  return request.then((resp) => resp.data);
 };
 
-const deleteItem = async (id) => {
+const deleteItem = (id) => {
   const request = axios.delete(`${baseURL}/${id}`);
-  return await request.then((resp) => resp.data);
+  return request.then((resp) => resp.data);
 };
 
 export default {
