@@ -45,11 +45,15 @@ const Form = ({ persons, setPersons, setFiltered, setMessage }) => {
         ...persons,
       ]; /* Using altPersons = persons just refers to values of persons in memory, [...persons] creates separate reference values in memory */
 
-      services.updateItem(altPersons[index].id, {
-        name: person.name,
-        id: person.id,
-        number: numberWithDashes,
-      });
+      services
+        .updateItem(altPersons[index].id, {
+          name: person.name,
+          id: person.id,
+          number: numberWithDashes,
+        })
+        .catch((err) =>
+          setMessage(`${name} cannot be edited as it doesn't exist`)
+        );
 
       altPersons[index] = {
         name: person.name,
