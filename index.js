@@ -41,7 +41,12 @@ app.get('/api/phonebook/:id', (request, response) => {
   const phoneBookNumber = phonebook.find(
     (phoneBookNumber) => phoneBookNumber.id === id
   );
-  response.json(phoneBookNumber);
+
+  if (phoneBookNumber) {
+    response.json(phoneBookNumber);
+  } else {
+    response.status(404).end();
+  }
 });
 
 const PORT = 3000;
