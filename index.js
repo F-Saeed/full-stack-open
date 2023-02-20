@@ -24,8 +24,24 @@ const phonebook = [
   },
 ];
 
+app.get('/info', (request, response) => {
+  const date = new Date();
+  const time = date.toGMTString();
+  response.send(
+    `<h3>Phonebook has info of ${phonebook.length} people</h3><p>${time}</p>`
+  );
+});
+
 app.get('/api/phonebook', (request, response) => {
   response.json(phonebook);
+});
+
+app.get('/api/phonebook/:id', (request, response) => {
+  const id = Number(request.params.id);
+  const phoneBookNumber = phonebook.find(
+    (phoneBookNumber) => phoneBookNumber.id === id
+  );
+  response.json(phoneBookNumber);
 });
 
 const PORT = 3000;
