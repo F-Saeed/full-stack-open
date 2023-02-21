@@ -73,8 +73,8 @@ app.post('/api/persons', (request, response) => {
 
   const person = {
     id: generateID(),
-    name: body.content.name,
-    number: body.content.number,
+    name: body.name,
+    number: body.number,
   };
 
   phonebook.concat(person);
