@@ -65,9 +65,23 @@ app.post('/api/persons', (request, response) => {
 
   const body = request.body;
 
-  if (!body.content) {
+  if (body.length === 0) {
     return response.status(400).json({
       error: 'content missing',
+    });
+  } else if (body.name === undefined || body.number === undefined) {
+    return response.status(400).json({
+      error: 'Name or Number is missing',
+    });
+  }
+
+  if (
+    phonebook.find(
+      (person) => person.name.toLowerCase() === body.name.toLowerCase()
+    )
+  ) {
+    return response.status(400).json({
+      error: 'Name must be unique',
     });
   }
 
@@ -77,7 +91,7 @@ app.post('/api/persons', (request, response) => {
     number: body.number,
   };
 
-  phonebook.concat(person);
+  phonebook = phonebook.concat(person);
 
   response.json(person);
 });
